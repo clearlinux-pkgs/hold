@@ -4,7 +4,7 @@
 #
 Name     : hold
 Version  : 0.1.0
-Release  : 2
+Release  : 3
 URL      : https://files.pythonhosted.org/packages/a4/b7/86fdc306647d16e6e1f1a69b25c95a42ee30e7efb83a48c27d543c5edf8a/hold-0.1.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/a4/b7/86fdc306647d16e6e1f1a69b25c95a42ee30e7efb83a48c27d543c5edf8a/hold-0.1.0.tar.gz
 Summary  : Hold methods for effective works
