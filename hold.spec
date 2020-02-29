@@ -4,23 +4,23 @@
 #
 Name     : hold
 Version  : 0.1.0
-Release  : 6
+Release  : 7
 URL      : https://files.pythonhosted.org/packages/a4/b7/86fdc306647d16e6e1f1a69b25c95a42ee30e7efb83a48c27d543c5edf8a/hold-0.1.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/a4/b7/86fdc306647d16e6e1f1a69b25c95a42ee30e7efb83a48c27d543c5edf8a/hold-0.1.0.tar.gz
 Summary  : Hold methods for effective works
 Group    : Development/Tools
 License  : MIT
-Requires: hold-python3
-Requires: hold-python
+Requires: hold-python = %{version}-%{release}
+Requires: hold-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
-No detailed description available
+UNKNOWN
 
 %package python
 Summary: python components for the hold package.
 Group: Default
-Requires: hold-python3
+Requires: hold-python3 = %{version}-%{release}
 
 %description python
 python components for the hold package.
@@ -30,6 +30,7 @@ python components for the hold package.
 Summary: python3 components for the hold package.
 Group: Default
 Requires: python3-core
+Provides: pypi(hold)
 
 %description python3
 python3 components for the hold package.
@@ -37,16 +38,25 @@ python3 components for the hold package.
 
 %prep
 %setup -q -n hold-0.1.0
+cd %{_builddir}/hold-0.1.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1537291207
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1582935002
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
